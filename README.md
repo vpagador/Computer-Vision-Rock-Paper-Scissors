@@ -30,7 +30,7 @@ Packages installed within my_env using pip:
 - RPS has attribute options which stores in a list the strings, 'rock', 'paper', 'scissors'.
 
 get_user_choice gets the input from user in a while loop, accepting under the condition that it exists within options:
-![image](https://user-images.githubusercontent.com/80417833/191305241-3345ff44-42e6-4708-b8dd-f495e21db0ec.png)
+![image](https://user-images.githubusercontent.com/80417833/191307796-01ce62f2-7486-4a3e-8f56-7528a9a85573.png)
 
 get_computer_choice uses the choice function from the random library to pick one from the options:
 ![image](https://user-images.githubusercontent.com/80417833/191306264-99cbdbd7-7ce4-4da1-b265-50a997da4114.png)
