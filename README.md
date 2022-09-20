@@ -35,7 +35,7 @@ get_user_choice gets the input from user in a while loop, accepting under the co
 get_computer_choice uses the choice function from the random library to pick one from the options:
 ![image](https://user-images.githubusercontent.com/80417833/191308003-6c31ae61-b40c-4c6b-9a3e-612130019a15.png)
 
-get_winner determines by the logic of the game if the user or computer wins the game by storing the (user) winning outcomes in an array and comparing with the list created with the inputs from both players:
+get_winner determines by the logic of the game if the user or computer wins the game by storing the (user) winning outcomes in an array and comparing them with the list created with the inputs from both players:
 ![image](https://user-images.githubusercontent.com/80417833/191306722-067cc9a9-d781-4f63-b5b0-33ad07173111.png)
 
 
