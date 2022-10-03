@@ -38,4 +38,21 @@ get_computer_choice uses the choice function from the random library to pick one
 get_winner determines by the logic of the game if the user or computer wins the game by storing the (user) winning outcomes in an array and comparing them with the list created with the inputs from both players:
 ![image](https://user-images.githubusercontent.com/80417833/191306722-067cc9a9-d781-4f63-b5b0-33ad07173111.png)
 
+## Milestone 4: Replace the Manual User Input with the Model
+
+- The function get_user_choice is replaced by get_prediction, which replaces the manual user input with the processed ouput of the model.
+- The model output is an array of four numbers representing the prediction probability of each class, of which the class with the highest number is automatically chosen as the user input to the game vs computer.
+- The time.time() + 5 variable is used to give the user 5 seconds to present a gesture to the camera, beyond which the predicted class is taken as input.
+
+![image](https://user-images.githubusercontent.com/80417833/193555297-cf2fee9b-dc4c-443f-a9c7-224cea375218.png)
+
+## Milsetone 5: Complete Game which plays until User or Computer wins Three Rounds of RPS
+
+- The game while loop runs until user or computer wins three times. 
+- The outcome of each game played is stored in the variable round = game.get_winner() 
+  - Its outcome recorded as a point added to either computer_wins or user_wins 
+  - This resets for each new game.
+
+![image](https://user-images.githubusercontent.com/80417833/193560273-6d28c47e-5a51-4cae-befc-5d37e88535a8.png)
+
 
