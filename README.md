@@ -28,6 +28,8 @@ Packages installed within my_env using pip:
 - Created class called RPS.
 - RPS has as methods: get_user_choice,get_computer choice, get_winner.
 - RPS has attribute options which stores in a list the strings, 'rock', 'paper', 'scissors'.
+- Function play(options) plays the game using the RPS methods
+- Options shown under if __name__ == __main__
 
 get_user_choice gets the input from user in a while loop, accepting under the condition that it exists within options:
 ![image](https://user-images.githubusercontent.com/80417833/191307796-01ce62f2-7486-4a3e-8f56-7528a9a85573.png)
@@ -35,9 +37,15 @@ get_user_choice gets the input from user in a while loop, accepting under the co
 get_computer_choice uses the choice function from the random library to pick one from the options (except nothing):
 ![image](https://user-images.githubusercontent.com/80417833/193561429-59e9a581-babb-4db4-864c-ec7670cc1da0.png)
 
-
 get_winner determines by the logic of the game if the user or computer wins the game by storing the (user) winning outcomes in an array and comparing them with the list created with the inputs from both players:
 ![image](https://user-images.githubusercontent.com/80417833/191306722-067cc9a9-d781-4f63-b5b0-33ad07173111.png)
+
+play(options)
+![image](https://user-images.githubusercontent.com/80417833/193562769-01525c33-cd96-490e-b559-ae8df5e48826.png)
+
+game options for user and computer:
+![image](https://user-images.githubusercontent.com/80417833/193562814-5987bf1a-c801-45d8-aca0-8a358174e0b5.png)
+
 
 ## Milestone 4: Replace the Manual User Input with the Model
 
