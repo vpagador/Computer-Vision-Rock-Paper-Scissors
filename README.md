@@ -40,7 +40,7 @@ get_computer_choice uses the choice function from the random library to pick one
 get_winner determines by the logic of the game if the user or computer wins the game by storing the (user) winning outcomes in an array and comparing them with the list created with the inputs from both players:
 ![image](https://user-images.githubusercontent.com/80417833/191306722-067cc9a9-d781-4f63-b5b0-33ad07173111.png)
 
-play(options)
+play(options):
 ![image](https://user-images.githubusercontent.com/80417833/193562769-01525c33-cd96-490e-b559-ae8df5e48826.png)
 
 game options for user and computer:
