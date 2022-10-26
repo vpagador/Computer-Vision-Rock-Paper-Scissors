@@ -31,6 +31,14 @@ Packages installed within my_env using pip:
 - Function play(options) plays the game using the RPS methods
 - Options shown under if __name__ == __main__
 
+class RPS with __init__ method:
+```python
+class RPS:
+
+    def __init__(self, options):
+        self.options = options
+```
+
 get_user_choice gets the input from user in a while loop, accepting under the condition that it exists within options:
 ```python
     def get_user_choice(self):
@@ -145,7 +153,7 @@ if __name__ == '__main__':
   - This resets for each new game.
 
 ```python
-ef play(options):
+def play(options):
     game = RPS(options)
     num_rounds = 3
     computer_wins=0
