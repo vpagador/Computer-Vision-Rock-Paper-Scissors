@@ -32,19 +32,57 @@ Packages installed within my_env using pip:
 - Options shown under if __name__ == __main__
 
 get_user_choice gets the input from user in a while loop, accepting under the condition that it exists within options:
-![image](https://user-images.githubusercontent.com/80417833/191307796-01ce62f2-7486-4a3e-8f56-7528a9a85573.png)
+```python
+    def get_user_choice(self):
+        valid_input = False
+        while not valid_input:
+            user_choice = input('Select Rock or Paper or Scissors: ').lower()
+            if user_choice.isalpha and user_choice in self.options:
+                return user_choice
+            else:
+                print('invalid option')
+```
 
 get_computer_choice uses the choice function from the random library to pick one from the options (except nothing):
-![image](https://user-images.githubusercontent.com/80417833/193561429-59e9a581-babb-4db4-864c-ec7670cc1da0.png)
+```python
+    def get_computer_choice(self):
+        computer_choice = choice(self.options)
+        return computer_choice
+```
 
 get_winner determines by the logic of the game if the user or computer wins the game by storing the (user) winning outcomes in an array and comparing them with the list created with the inputs from both players:
-![image](https://user-images.githubusercontent.com/80417833/191306722-067cc9a9-d781-4f63-b5b0-33ad07173111.png)
+```python
+    def get_winner(self):
+        # store user win outcomes in list
+        win_outcomes = [['rock','scissors'], ['scissors','paper'], ['paper','rock']]
+
+        user = self.get_user_choice()
+        computer = self.get_computer_choice()
+        # store in battle variable in order of user then computer
+        battle = [user,computer]
+        print(battle)
+        # determine outcome of game depending on exisitence of any win_outcome
+        if user == computer:
+            print('draw')
+        elif battle in win_outcomes:
+            print('You win!')
+        else:
+            print('You lose!')
+```
 
 play(options):
-![image](https://user-images.githubusercontent.com/80417833/193562769-01525c33-cd96-490e-b559-ae8df5e48826.png)
+```python
+def play(options):
+    game = RPS(options)     
+    game.get_winner()
+```
 
-game options for user and computer:
-![image](https://user-images.githubusercontent.com/80417833/193562814-5987bf1a-c801-45d8-aca0-8a358174e0b5.png)
+game options for user and computer within `if __name__ == '__main__':` block:
+```python
+if __name__ == '__main__':
+    options = ['rock','paper','scissors']
+    play(options)
+```
 
 
 ## Milestone 4: Replace the Manual User Input with the Model
@@ -53,7 +91,51 @@ game options for user and computer:
 - The model output is an array of four numbers representing the prediction probability of each class, of which the class with the highest number is automatically chosen as the user input to the game vs computer.
 - The time.time() + 5 variable is used to give the user 5 seconds to present a gesture to the camera, beyond which the predicted class is taken as input.
 
-![image](https://user-images.githubusercontent.com/80417833/193555297-cf2fee9b-dc4c-443f-a9c7-224cea375218.png)
+```python
+    def get_prediction(self):
+        model = load_model('converted_keras/keras_model.h5')
+        cap = cv2.VideoCapture(0)
+        data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+        select_class = None
+        
+        end_time = time.time() + 5
+
+        while True: 
+            timer = time.time() 
+
+            # load model and predict data
+            ret, frame = cap.read()
+            resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
+            image_np = np.array(resized_frame)
+            normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
+            data[0] = normalized_image
+            prediction = model.predict(data)
+            cv2.imshow('frame', frame)
+            print(prediction, time.time())
+            
+            # retrieve class with highest probability
+            print(max(prediction[0]))
+            class_list = []
+
+            for i in prediction[0]:
+                class_list.append(i)
+            for i in range(len(class_list)):
+                if class_list[i] == max(prediction[0]):
+                    select_class = self.options[i]
+
+            # Press q to close the window
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+            elif timer >= end_time:
+                print(f'\nYou chose {select_class}')
+                break
+
+        # After the loop release the cap object
+        cap.release()
+        # Destroy all the windows
+        cv2.destroyAllWindows()
+        return select_class
+```
 
 ## Milsetone 5: Complete Game which plays until User or Computer wins Three Rounds of RPS
 
@@ -62,6 +144,28 @@ game options for user and computer:
   - Its outcome recorded as a point added to either computer_wins or user_wins 
   - This resets for each new game.
 
-![image](https://user-images.githubusercontent.com/80417833/193560273-6d28c47e-5a51-4cae-befc-5d37e88535a8.png)
+```python
+ef play(options):
+    game = RPS(options)
+    num_rounds = 3
+    computer_wins=0
+    user_wins =0
+    # play games until user or computer gets 3 wins first
+    game_winner = 'n'
+    while game_winner == 'n':    
+        round = game.get_winner()
+        if round =='user':
+            user_wins += 1
+        elif round =='computer':
+            computer_wins +=1
+        # show score
+        print(f'{user_wins} - {computer_wins}')
+        if user_wins == num_rounds:
+            game_winner = 'y'
+            print(f'\nYou won {num_rounds} rounds')
+        elif computer_wins == num_rounds:
+            game_winner = 'y'
+            print(f'\nYou lost {num_rounds} rounds')
+```
 
 
